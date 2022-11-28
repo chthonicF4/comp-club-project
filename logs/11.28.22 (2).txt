@@ -1,0 +1,17 @@
+
+[11/28/22 12:02:35] server binded to ('10.191.213.28', 50505)
+[11/28/22 12:02:35] server awaiting connections on ('10.191.213.28', 50505)
+[11/28/22 12:03:00] server accepted connection from ('10.191.213.28', 51728)
+[11/28/22 12:03:00] server starting handle for ('10.191.213.28', 51728)
+[11/28/22 12:03:00] ('10.191.213.28', 51728) recved nickname 'dan' , will now refer to thread as 'dan'
+[11/28/22 12:03:53] dan has dissconected
+[11/28/22 12:03:58] server accepted connection from ('10.191.213.28', 51764)
+[11/28/22 12:03:58] server starting handle for ('10.191.213.28', 51764)
+[11/28/22 12:03:58] ('10.191.213.28', 51764) recved nickname 'dan' , will now refer to thread as 'dan'
+[11/28/22 12:04:17] server accepted connection from ('10.191.213.28', 51808)
+[11/28/22 12:04:17] server starting handle for ('10.191.213.28', 51808)
+[11/28/22 12:04:17] ('10.191.213.28', 51808) recved nickname 'dan2' , will now refer to thread as 'dan2'
+[11/28/22 12:05:06] dan has dissconected
+[11/28/22 12:06:38] server accepted connection from ('10.191.213.28', 51852)
+[11/28/22 12:06:38] server starting handle for ('10.191.213.28', 51852)
+[11/28/22 12:06:38] ('10.191.213.28', 51852) recved nickname 'dan' , will now refer to thread as 'dan'

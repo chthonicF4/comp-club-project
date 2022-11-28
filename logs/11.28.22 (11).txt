@@ -1,0 +1,8 @@
+
+[11/28/22 12:22:51] server binded to ('10.191.213.28', 50505)
+[11/28/22 12:22:51] server awaiting connections on ('10.191.213.28', 50505)
+[11/28/22 12:23:06] server accepted connection from ('10.191.213.28', 52359)
+[11/28/22 12:23:06] server starting handle for ('10.191.213.28', 52359)
+[11/28/22 12:23:06] ('10.191.213.28', 52359) recved nickname 'da' , will now refer to thread as 'da'
+[11/28/22 12:23:06] da : client chose colour 'orange'
+[11/28/22 12:23:06] da has dissconected
