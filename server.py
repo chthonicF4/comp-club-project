@@ -1,9 +1,8 @@
-import socket , os , threading , pickler , IP4hash
-from datetime import datetime
-import tkinter as tk
+import socket , lib.pickler as pickler , threading , lib.IP4hash as IP4hash , tkinter as tk , os
+from lib.colours import c as colr , colrP , Crmv
+from lib.personDrawer import *
 from time import sleep
-from colours import c as colr
-from colours import colrP
+from datetime import datetime
 
 # colour presets
 C_input = colrP(fg="cyan",ut="bold")
@@ -11,12 +10,16 @@ C_wrng = colrP(fg="lightred",ut="bold")
 C_out = colrP(fg="blue")
 C_Imprtnt = colrP(fg="yellow",ut=["bold","underline"])
 
+# constants and global variables
 
 HOST = socket.gethostbyname(socket.gethostname())
 PORT = 50505
 WIDTH = 500
 HEIGHT = 500
 Shutdown = False
+connections = []
+
+# define and initiate logging functions
 
 def log_init_() :
     try:
@@ -43,13 +46,14 @@ def time() :
     return datetime.now().strftime("[%D %H:%M:%S]")
 
 def log(str) : 
+    print(str)
     log = open(logFile,"a")
-    log.write(f"\n{time()} {str}")
+    log.write(f"\n{time()} {Crmv(str)}")
     log.close()
 
 logFile = log_init_()
 
-connections = []
+# define networking functions
 
 def find(conn,connections):
     for index , thing in enumerate(connections):
@@ -68,7 +72,7 @@ def clientHandle(addr,conn):
     pickler.send([(WIDTH,HEIGHT)],conn)
     # init conn data
     index = connections.index([conn])
-    connections[index] = [conn,(0,0),nickname]
+    connections[index] = [conn,(WIDTH//2,HEIGHT//2),nickname]
     # network flags
     #
     # ccng : change in coords request
@@ -102,8 +106,8 @@ def clientHandle(addr,conn):
                 break
             if msgs :
                 for msg in msgs[1] :
-                    print(f"[{nickname}] {msg}")
-                    brodcast(f"[{nickname}] {msg}")
+                    print(f"[{nickname[0]}] {msg}")
+                    brodcast(f"[{nickname[0]}] {msg}")
             # send player postion data
             try: 
                 data = []
@@ -117,13 +121,13 @@ def clientHandle(addr,conn):
                 break
         except:
             break
-        sleep(0.08)
+        sleep(0.04)
         pass
 
     # exit protocol
     index = find(conn,connections)
     connections.pop(index)
-    print(colr(f"{nickname} has dissconected",cps=C_out))
+    print(colr(f"{nickname[0]} has dissconected",cps=C_out))
     log(f"{threading.current_thread().name} has dissconected")
     return
 
@@ -132,23 +136,6 @@ def brodcast(msg):
     for conn in connections:
         pickler.send(msg,conn[0])
         sleep(0.08)
-
-def draw():
-    prevpix = []
-    while Shutdown == False :
-        sleep(0.5)
-        # delete old stuff
-        for thing in prevpix :
-            c.delete(thing)
-        # draw new stuff
-        for client in connections:
-            prevpix.append(pixle(client[1],client[2][1]))
-            pass
-
-def pixle(coords,colour):
-    x , y = coords
-    shape = c.create_rectangle(x-1,y+2,x+1,y-1,fill=colour,outline=colour)
-    return shape
 
 def networking():
     global connections
@@ -172,18 +159,30 @@ def networking():
             newThread.start()
         sock.close()
     return
-                
-# window init
+
+# define graphics functions
+def draw():
+    prevpix = []
+    while Shutdown == False :
+        sleep(0.5)
+        # delete old stuff
+        for thing in prevpix :
+            c.delete(thing)
+        # draw new stuff
+        for client in connections:
+            try:
+                prevpix.append(pixle(c,client[1],client[2][1]))
+                prevpix.append(text(c,client[1],client[2][0]))
+            except:
+                pass
+
+
+#  window setup
 
 root = tk.Tk(className=" ROOM PEEK - Server")
 root.geometry(f"{WIDTH}x{HEIGHT}")
 c = tk.Canvas(width=WIDTH,height=HEIGHT,master=root,bg="grey")
 c.pack()
-
-networkThread = threading.Thread(target=networking,args=())
-networkThread.start()
-drawingThread = threading.Thread(target=draw,args=())
-drawingThread.start()
 
 def onClose() :
     global Shutdown
@@ -207,6 +206,12 @@ def onClose() :
     #end main loop
     root.quit()
     log("server shutdown")
+
+networkThread = threading.Thread(target=networking,args=())
+networkThread.start()
+drawingThread = threading.Thread(target=draw,args=())
+drawingThread.start()
+
 
 root.protocol("WM_DELETE_WINDOW", onClose)
 root.mainloop()

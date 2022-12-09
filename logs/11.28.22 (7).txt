@@ -1,7 +1,0 @@
-
-[11/28/22 12:19:03] server binded to ('10.191.213.28', 50505)
-[11/28/22 12:19:03] server awaiting connections on ('10.191.213.28', 50505)
-[11/28/22 12:19:10] server accepted connection from ('10.191.213.28', 52251)
-[11/28/22 12:19:10] server starting handle for ('10.191.213.28', 52251)
-[11/28/22 12:19:10] ('10.191.213.28', 52251) recved nickname 'dan' , will now refer to thread as 'dan'
-[11/28/22 12:19:10] dan : client chose colour 'orange'

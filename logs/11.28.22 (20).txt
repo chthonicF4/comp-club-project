@@ -1,6 +1,0 @@
-
-[11/28/22 12:53:31] server binded to ('10.191.213.28', 50505)
-[11/28/22 12:53:31] server awaiting connections on ('10.191.213.28', 50505)
-[11/28/22 12:53:33] server window closed, now closing server 
-[11/28/22 12:53:33] brodcasting msg :['quit']
-[11/28/22 12:53:33] server shutdown
