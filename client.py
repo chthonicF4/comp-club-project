@@ -24,13 +24,14 @@ nickname = str(input(colr("name>> ",cps=C_input)))
 
 WIDTH = 500
 HEIGHT = 500
+
 windoExsist = True
 
     #client data
 
 colours = ["red","orange","yellow","green","blue","purple","pink","black","white"]
 for index,colour in enumerate(colours) :
-    print(f"[{index}] : '{colour}' ,",end="")
+    print(f"[{index}] : '{(colour)}'")
 print("")
 colour = colours[int(input(f"choose a colour (0-{len(colours)}) : "))]
 coordChange = [0,0]

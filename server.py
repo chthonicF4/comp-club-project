@@ -22,12 +22,16 @@ connections = []
 # define and initiate logging functions
 
 def log_init_() :
+    # try make logs dir 
     try:
         os.mkdir("logs")
     except:
         pass
     count = 0
     date = datetime.now().strftime("%D").replace("/",".")
+
+    # define function to make new log file so it can loop till it finds a valid name
+
     def make_file(count) : 
         file = f"logs/{date} ({count}).txt"
         try :
@@ -43,9 +47,11 @@ def log_init_() :
     return made
     
 def time() :
+    # returns the current time
     return datetime.now().strftime("[%D %H:%M:%S]")
 
 def log(str) : 
+    # takes in a string , adds the time to it and saves it to the log file
     print(str)
     log = open(logFile,"a")
     log.write(f"\n{time()} {Crmv(str)}")
@@ -56,6 +62,7 @@ logFile = log_init_()
 # define networking functions
 
 def find(conn,connections):
+    # finds a conn in a list and retrns the index
     for index , thing in enumerate(connections):
         if thing[0] == conn :
             return index 
@@ -132,6 +139,7 @@ def clientHandle(addr,conn):
     return
 
 def brodcast(msg):
+    #  brodcasts a message to all conected clients
     log(f"brodcasting msg :{msg}")
     for conn in connections:
         pickler.send(msg,conn[0])
@@ -142,18 +150,15 @@ def networking():
     name = (colr("server",cps=C_Imprtnt))
     with socket.socket(socket.AF_INET) as sock :
         sock.bind((HOST,PORT))
-        log(f"server binded to {(HOST,PORT)}")
-        print(f"{name} binded to {(HOST,PORT)}")
-        log(f"server awaiting connections on {(HOST,PORT)}")
-        print(f"{name} awaiting connections on {(HOST,PORT)}")
+        log(f"{name} binded to {(HOST,PORT)}")
+        log(f"{name} awaiting connections on {(HOST,PORT)}")
         print(colr(f"server code : {IP4hash.encode(HOST)}",cps=C_out))
         while Shutdown == False :
             sock.listen(1)
             conn,addr = sock.accept()
             if Shutdown == True :
                 break
-            log(f"server accepted connection from {addr}")
-            print(colr(f"{name} accepted connection from {colr(addr,cps=C_input)}",cps=C_out))
+            log(colr(f"{name} accepted connection from {colr(addr,cps=C_input)}",cps=C_out))
             connections.append([conn])
             newThread  = threading.Thread(target=clientHandle,args=(addr,conn),name=f"{addr}")
             newThread.start()

@@ -1,0 +1,8 @@
+
+[12/13/22 12:27:42] server binded to ('10.151.22.145', 50505)
+[12/13/22 12:27:42] server awaiting connections on ('10.151.22.145', 50505)
+[12/13/22 12:28:56] server accepted connection from ('10.151.22.145', 61731)
+[12/13/22 12:28:56] server starting handle for ('10.151.22.145', 61731)
+[12/13/22 12:28:56] ('10.151.22.145', 61731) recved nickname 'dan' , will now refer to thread as 'dan'
+[12/13/22 12:28:56] dan : client chose colour 'blue'
+[12/13/22 12:29:39] dan has dissconected
